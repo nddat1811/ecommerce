@@ -1,8 +1,8 @@
-import React, { creatContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const ShopContext = creatContext();
+const ShopContext = createContext();
 
-export const StateContext = (children) => {
+export const StateContext = ({children}) => {
   //Add our data for the state
   const [quantity, setQuantity] = useState(1);
   const [showCart, setShowCart] = useState(false);
@@ -42,6 +42,26 @@ export const StateContext = (children) => {
       setCartItems([...cartItems, { ...product, quantity: quantity }]);
     }
   };
+
+  //Remove Product
+  const onRemove = (product) => {
+    //Check if the Product is already in the cart
+    const exist = cartItems.find((item) => item.slug === product.slug);
+    if (exist.quantity === 1) {
+      setCartItems(cartItems.filter((item) => item.slug !== product.slug));
+    } else {
+      setCartItems(
+        cartItems.map((item) =>
+          item.slug === product.slug
+            ? {
+                ...exist,
+                quantity: exist.quantity - 1,
+              }
+            : item
+        )
+      );
+    }
+  }
   return (
     <ShopContext.Provider
       value={{
@@ -52,6 +72,7 @@ export const StateContext = (children) => {
         setShowCart,
         cartItems,
         onAdd,
+        onRemove
       }}
     >
       {children}

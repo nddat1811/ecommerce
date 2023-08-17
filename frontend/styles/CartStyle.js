@@ -10,7 +10,6 @@ export const CartWrapper = styled.div`
   z-index: 100;
   display: flex;
   justify-content: flex-end;
-  display: none;
 `;
 
 export const CartStyle = styled.div`
@@ -61,8 +60,3 @@ export const EmptyStyle = styled.div`
     color: var(--secondary);
   }
 `;
-
-export const Quantity = styled.div`
-
-`;
-

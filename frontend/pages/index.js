@@ -15,7 +15,7 @@ export default function Home() {
     return <p>Loading...</p>;
   }
   if (error) {
-    return <p>SHIT...{error.message}</p>;
+    return <p>SHITsss...{error.message}</p>;
   }
   const products = data.products.data;
 

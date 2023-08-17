@@ -28,7 +28,7 @@ export default function ProductDetails() {
     return <p>Loading...</p>;
   }
   if (error) {
-    return <p>SHIT...{error.message}</p>;
+    return <p>SHITlol...{error.message}</p>;
   }
 
   const { title, description, image } = data.products.data[0].attributes;

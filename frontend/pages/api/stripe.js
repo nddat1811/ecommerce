@@ -11,8 +11,14 @@ export default async function handler(req, res) {
         mode: "payment",
         payment_method_types: ["card"],
         shipping_address_collection: {
-          allowed_countries: ["US", "CA"],
+          allowed_countries: ["US", "CA", "GB", "RO", "DE"],
         },
+        allow_promotion_codes:true,
+        shipping_options: [
+          {
+            shipping_rate: "shr_1NgI9KK9Wa8J3tVPHV94O84h",
+          },
+        ],
         line_items: req.body.map((item) => {
           return {
             price_data: {
@@ -23,6 +29,10 @@ export default async function handler(req, res) {
               },
               unit_amount: item.price * 100,
             },
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1,
+            },
             quantity: item.quantity,
           };
         }),
@@ -32,7 +42,7 @@ export default async function handler(req, res) {
       });
       res.status(200).json(session);
     } catch (error) {
-        res.status(error.statusCode || 500).json(error.message)
+      res.status(error.statusCode || 500).json(error.message);
     }
   }
 }

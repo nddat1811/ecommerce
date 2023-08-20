@@ -1,9 +1,13 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import shiba from "@/public/shiba.png";
-import { styled } from "styled-components";
-
-const { motion } = require("framer-motion");
+import {
+  Wrapper,
+  InfoWrapper,
+  Card,
+  Address,
+  OrderInfo,
+} from "@/styles/SuccessStyle";
 
 const stripe = require("stripe")(
   `${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`
@@ -26,7 +30,7 @@ export default function Success({ order }) {
       <Card
         animate={{ opacity: 1, scale: 1 }}
         initial={{ opacity: 0, scale: 0.75 }}
-        transition={{delay:0.5}}
+        transition={{ delay: 0.5 }}
       >
         <h1> Thank you for your order</h1>
         <h2>A confirmation email has been sent to </h2>
@@ -59,44 +63,3 @@ export default function Success({ order }) {
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  margin: 5rem 15rem;
-`;
-
-const Card = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-  border-radius: 2rem;
-  padding: 3rem;
-  h2 {
-    margin-bottom: 1rem 0.5rem;
-  }
-  button {
-    color: white;
-    background: var(--primary);
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 1rem 2rem;
-    cursor: pointer;
-  }
-`;
-const InfoWrapper = styled.div`
-  display: flex;
-  margin: 2rem 0rem;
-`;
-
-const Address = styled.div`
-  font-size: 1rem;
-  width: 100%;
-`;
-
-const OrderInfo = styled.div`
-  font-size: 1rem;
-  width: 100%;
-  div {
-    padding-bottom: 1rem;
-  }
-`;
